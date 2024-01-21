@@ -9,24 +9,28 @@ function AdjustNegativeDifference(difference) {
     } else if (difference.days < 0) {
         difference.months -= 1;
         difference.days += new Date(difference.years, difference.months, 0).getDate();
-        return AdjustNegativeDifference(difference)
+        return AdjustNegativeDifference(difference);
     } else if (difference.hours < 0) {
-        difference.days -= 1
-        difference.hours += 24
-        return AdjustNegativeDifference(difference)
+        difference.days -= 1;
+        difference.hours += 24;
+        return AdjustNegativeDifference(difference);
     } else if (difference.minutes < 0) {
-        difference.hours -= 1
-        difference.minutes += 60
-        return AdjustNegativeDifference(difference)
+        difference.hours -= 1;
+        difference.minutes += 60;
+        return AdjustNegativeDifference(difference);
     } else if (difference.seconds < 0) {
-        difference.minutes -= 1
-        difference.seconds += 60
-        return AdjustNegativeDifference(difference)
+        difference.minutes -= 1;
+        difference.seconds += 60;
+        return AdjustNegativeDifference(difference);
+    } else if (difference.milliseconds < 0) {
+        difference.seconds -= 1;
+        difference.milliseconds += 1000;
+        return AdjustNegativeDifference(difference);
     }
     return true;
 }
 
-function FromLocal(date1, date2) {
+function Difference(date1, date2) {
     date1 = new Date(date1);
     date2 = new Date(date2);
     let units = {
@@ -44,29 +48,12 @@ function FromLocal(date1, date2) {
 }
 
 function IsLeapYear(year) {
-    if (year % 4 != 0) return false;
+    if ((year % 4 != 0) || (year % 100 == 0 && year % 400 != 0)) return false;
     return true;
 }
 
-function FromUTC(date1, date2) {
-    date1 = new Date(date1);
-    date2 = new Date(date2);
-    let units = {
-        years: date2.getUTCFullYear() - date1.getUTCFullYear(),
-        months: date2.getUTCMonth() - date1.getUTCMonth(),
-        days: date2.getUTCDate() - date1.getUTCDate(),
-        hours: date2.getUTCHours() - date1.getUTCHours(),
-        minutes: date2.getUTCMinutes() - date1.getUTCMinutes(),
-        seconds: date2.getUTCSeconds() - date1.getUTCSeconds(),
-        milliseconds: date2.getUTCMilliseconds() - date1.getUTCMilliseconds(),
-    }
-    if (AdjustNegativeDifference(units)) {
-        return units;
-    }
-}
-
 function FromTimestamp(timestamp1, timestamp2) {
-    return parseInt(timestamp2) - parseInt(timestamp1);
+    return Date.parse(timestamp2) - Date.parse(timestamp1);
 }
 
-module.exports = { AdjustNegativeDifference, FromLocal, FromUTC, FromTimestamp, IsLeapYear }
+module.exports = { Difference, FromTimestamp, IsLeapYear }
