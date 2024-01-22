@@ -53,7 +53,7 @@ function IsLeapYear(year) {
 }
 
 function FromTimestamp(timestamp1, timestamp2) {
-    return Date.parse(timestamp2) - Date.parse(timestamp1);
+    return Date.parse(new Date(timestamp2)) - Date.parse(new Date(timestamp1));
 }
 
 module.exports = { Difference, FromTimestamp, IsLeapYear }
