@@ -1,5 +1,4 @@
-const timeSince = require("../main")
-
+const timeSince = require("@devx./timesince")
 console.log(timeSince.Difference("2000-06-01", "2023-01-02")) // ISO dates
 console.log(timeSince.Difference("1974-02-04 2:37:49:10 PM", "2021-02-04 4:37:38:40 PM")) // ISO dates with time format
 console.log(timeSince.Difference("06/28/1987", "07/26/2024")) // MM/DD/YYYY dates
