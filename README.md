@@ -1,4 +1,7 @@
 # TimeSince
+<a href="https://github.com/010DevX101/TimeSince/actions"><img src="https://github.com/010DevX101/TimeSince/actions/workflows/npm-publish.yml/badge.svg" alt="Tests status"/></a>
+<br>
+<br>
 JavaScript NPM package to calculate the time difference between two dates.
 
 ## Usage
